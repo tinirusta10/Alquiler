@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alquiler.Server", "Alquiler\Server\Alquiler.Server.csproj", "{6D59F534-CF44-4BC5-A024-56A76E566B35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alquiler.Server", "Alquiler\Server\Alquiler.Server.csproj", "{6D59F534-CF44-4BC5-A024-56A76E566B35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alquiler.Client", "Alquiler\Client\Alquiler.Client.csproj", "{37BF4AA0-0BE0-4C41-A052-1C0388C3FD94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alquiler.Client", "Alquiler\Client\Alquiler.Client.csproj", "{37BF4AA0-0BE0-4C41-A052-1C0388C3FD94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alquiler.Shared", "Alquiler\Shared\Alquiler.Shared.csproj", "{0C8B60B9-B336-4A20-876E-51314F8511FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alquiler.Shared", "Alquiler\Shared\Alquiler.Shared.csproj", "{0C8B60B9-B336-4A20-876E-51314F8511FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
