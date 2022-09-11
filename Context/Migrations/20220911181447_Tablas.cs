@@ -4,7 +4,7 @@
 
 namespace Context.Migrations
 {
-    public partial class tablas : Migration
+    public partial class Tablas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,12 +68,11 @@ namespace Context.Migrations
                 name: "Productos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", maxLength: 10, nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreProducto = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    PrecioProducto = table.Column<float>(type: "real", maxLength: 20, nullable: false),
-                    DetallesProducto = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    FotoProducto = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    NombreProducto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PrecioProducto = table.Column<int>(type: "int", nullable: false),
+                    DetallesProducto = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,6 +104,31 @@ namespace Context.Migrations
                 {
                     table.PrimaryKey("PK_TipoDocumento", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Fotos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    foto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fotos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Fotos_Productos_ProductoId",
+                        column: x => x.ProductoId,
+                        principalTable: "Productos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fotos_ProductoId",
+                table: "Fotos",
+                column: "ProductoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -113,19 +137,22 @@ namespace Context.Migrations
                 name: "Departamento");
 
             migrationBuilder.DropTable(
+                name: "Fotos");
+
+            migrationBuilder.DropTable(
                 name: "Localidad");
 
             migrationBuilder.DropTable(
                 name: "Persona");
 
             migrationBuilder.DropTable(
-                name: "Productos");
-
-            migrationBuilder.DropTable(
                 name: "Provincia");
 
             migrationBuilder.DropTable(
                 name: "TipoDocumento");
+
+            migrationBuilder.DropTable(
+                name: "Productos");
         }
     }
 }

@@ -2,10 +2,15 @@
 using Context;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddControllersWithViews().AddJsonOptions(
+    x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -16,7 +21,16 @@ builder.Services.AddDbContext<Bdcontext>(options =>
 });
 
 
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "alquiler", Version = "v1" });
+});
+
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json",
+    "Venta v1"));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

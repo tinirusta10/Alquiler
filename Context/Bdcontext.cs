@@ -26,5 +26,7 @@ namespace Context
 
         public DbSet<Localidad> Localidad { get; set; }
 
+        public DbSet<Fotos> Fotos { get; set; }
+
     }
 }

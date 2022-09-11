@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Context.Migrations
 {
     [DbContext(typeof(Bdcontext))]
-    [Migration("20220907175902_tablas")]
-    partial class tablas
+    [Migration("20220911181447_Tablas")]
+    partial class Tablas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,28 @@ namespace Context.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departamento");
+                });
+
+            modelBuilder.Entity("Context.Data.Entidades.Fotos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("foto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("Fotos");
                 });
 
             modelBuilder.Entity("Context.Data.Entidades.Localidad", b =>
@@ -157,29 +179,20 @@ namespace Context.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(10)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("DetallesProducto")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("FotoProducto")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NombreProducto")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("PrecioProducto")
-                        .HasMaxLength(20)
-                        .HasColumnType("real");
+                    b.Property<int>("PrecioProducto")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -216,6 +229,22 @@ namespace Context.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TipoDocumento");
+                });
+
+            modelBuilder.Entity("Context.Data.Entidades.Fotos", b =>
+                {
+                    b.HasOne("Context.Data.Entidades.Producto", "Producto")
+                        .WithMany("Fotos")
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("Context.Data.Entidades.Producto", b =>
+                {
+                    b.Navigation("Fotos");
                 });
 #pragma warning restore 612, 618
         }
