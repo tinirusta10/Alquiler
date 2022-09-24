@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Context\Context.csproj" />
     <ProjectReference Include="..\Shared\Alquiler.Shared.csproj" />
   </ItemGroup>
 
