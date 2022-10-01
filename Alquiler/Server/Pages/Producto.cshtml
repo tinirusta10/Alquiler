@@ -1,5 +1,8 @@
 ﻿@page "/producto"
 @model Alquiler.Server.Pages.ProductoModel
+@using Alquiler.Shared
+
+
 
 
     <html>
@@ -462,11 +465,14 @@
             </section>
 
             </header>
+            
 
         </body>
+        
 
     </html>
 
 
 @{
+    List<Context.Data.Entidades.Producto> producto;
 }
