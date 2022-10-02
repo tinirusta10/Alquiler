@@ -2,9 +2,12 @@
 
 namespace Alquiler.Client.Servicios
 {
-    public class HttpService
+    public class HttpService : IHttpService
     {
         private readonly HttpClient http;
+
+
+        
 
         public HttpService(HttpClient http)
         {

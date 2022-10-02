@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alquiler.Client", "Alquiler
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alquiler.Shared", "Alquiler\Shared\Alquiler.Shared.csproj", "{0C8B60B9-B336-4A20-876E-51314F8511FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Context", "Context\Context.csproj", "{D4301794-EAE5-490D-82F6-021CA7DEB07F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Context", "Context\Context.csproj", "{D4301794-EAE5-490D-82F6-021CA7DEB07F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
