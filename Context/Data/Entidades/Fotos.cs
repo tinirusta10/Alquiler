@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Context.Data.Entidades
 {
-    public class Fotos
+    public class Foto
     {
         public int Id { get; set; }
 
         [Required(ErrorMessage = "La foto es obligatotia")]
-        public string foto { get; set; }
+        public string Fotito { get; set; }
 
 
         
