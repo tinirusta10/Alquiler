@@ -11,19 +11,19 @@ namespace Alquiler.Client.Servicios
             this.http = http;
         }
 
-        //public async Task<Httprespuesta<T>> Get<T>(string url)
-        //{
-        //    var response = await http.GetAsync(url);
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var respuesta = await deserealizarRespuesta<T>(response);
-        //        return new Httprespuesta<T>(respuesta, false, response);
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
+        public async Task<Httprespuesta<T>> Get<T>(string url)
+        {
+            var response = await http.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var respuesta = await deserealizarRespuesta<T>(response);
+                return new Httprespuesta<T>(respuesta, false, response);
+            }
+            else
+            {
+                return new Httprespuesta<T>(default, true, response);
+            }
+        }
 
         private async Task<T> deserealizarRespuesta<T>(HttpResponseMessage response)
         {
