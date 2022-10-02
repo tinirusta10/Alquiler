@@ -45,13 +45,23 @@ namespace Context.Data.Entidades
         [MaxLength(20, ErrorMessage = "El Numero de telefono no debe superar los 20 caracteres")]
         public int NumeroTelefono { get; set; }
 
-        [Required]
-        [MaxLength(4, ErrorMessage = "Tipo de documento incorrecto")]
-        public string IdTipoDocumento { get; set; }
+       
 
-        [Required]
-        [MaxLength(50)]
-        public string IdProvincia { get; set; }
+        [Required(ErrorMessage = "El Tipo de Documento es obligatorio")]
+        public int TipoDocumentoId { get; set; }
+        public TipoDocumento TipoDocumento { get; set; }
+
+
+
+
+
+        [Required(ErrorMessage = "La Provincia es obligatorio")]
+        public int ProvinciaId { get; set; }
+        public Provincia Provincia { get; set; }
+
+
+
+
 
         [Required]
         [MaxLength(30)]
@@ -61,9 +71,12 @@ namespace Context.Data.Entidades
         [MaxLength(5)]
         public int Piso { get; set; }
 
-        [Required]
-        [MaxLength(30)]
-        public string IdDepartamento { get; set; }
+       
+        [Required(ErrorMessage = "El Departamento es obligatorio")]
+        public int DepartamentoId { get; set; }
+        public Departamento Departamento { get; set; }
+
+
 
         [Required]
         [MaxLength(30)]
@@ -73,10 +86,15 @@ namespace Context.Data.Entidades
         [MaxLength(30)]
         public string Depto { get; set; }
 
-        [Required]
-        [MaxLength(25)]
-        public string IdLocalidad { get; set; }
+       
+        [Required(ErrorMessage = "La localidad es obligatorio")]
+        public int LocalidadId { get; set; }
+        public Localidad Localidad { get; set; }
 
+
+
+
+        
         [Required]
         [MaxLength(6)]
         public int Altura { get; set; }

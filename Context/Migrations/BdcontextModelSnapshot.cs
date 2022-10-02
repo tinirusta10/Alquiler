@@ -30,14 +30,16 @@ namespace Context.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("NombreDepartamento")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departamento");
+                    b.ToTable("Departamentos");
                 });
 
-            modelBuilder.Entity("Context.Data.Entidades.Fotos", b =>
+            modelBuilder.Entity("Context.Data.Entidades.Foto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,12 +47,12 @@ namespace Context.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ProductoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("foto")
+                    b.Property<string>("Fotito")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -68,11 +70,13 @@ namespace Context.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("NombreLocalidad")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Localidad");
+                    b.ToTable("Localidades");
                 });
 
             modelBuilder.Entity("Context.Data.Entidades.Persona", b =>
@@ -110,30 +114,16 @@ namespace Context.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("int");
 
+                    b.Property<int>("DepartamentoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Depto")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("IdDepartamento")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("IdLocalidad")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.Property<string>("IdProvincia")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("IdTipoDocumento")
-                        .IsRequired()
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
+                    b.Property<int>("LocalidadId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Mail")
                         .IsRequired()
@@ -153,6 +143,9 @@ namespace Context.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("int");
 
+                    b.Property<int>("ProvinciaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Referencia")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -163,6 +156,9 @@ namespace Context.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
+                    b.Property<int>("TipoDocumentoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("calle")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -170,7 +166,15 @@ namespace Context.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persona");
+                    b.HasIndex("DepartamentoId");
+
+                    b.HasIndex("LocalidadId");
+
+                    b.HasIndex("ProvinciaId");
+
+                    b.HasIndex("TipoDocumentoId");
+
+                    b.ToTable("Personas");
                 });
 
             modelBuilder.Entity("Context.Data.Entidades.Producto", b =>
@@ -206,11 +210,13 @@ namespace Context.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("NombreProvincia")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Provincia");
+                    b.ToTable("Provincias");
                 });
 
             modelBuilder.Entity("Context.Data.Entidades.TipoDocumento", b =>
@@ -222,14 +228,16 @@ namespace Context.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("NombreTipoDocumento")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TipoDocumento");
+                    b.ToTable("TipoDocumentos");
                 });
 
-            modelBuilder.Entity("Context.Data.Entidades.Fotos", b =>
+            modelBuilder.Entity("Context.Data.Entidades.Foto", b =>
                 {
                     b.HasOne("Context.Data.Entidades.Producto", "Producto")
                         .WithMany("Fotos")
@@ -240,9 +248,64 @@ namespace Context.Migrations
                     b.Navigation("Producto");
                 });
 
+            modelBuilder.Entity("Context.Data.Entidades.Persona", b =>
+                {
+                    b.HasOne("Context.Data.Entidades.Departamento", "Departamento")
+                        .WithMany("Personas")
+                        .HasForeignKey("DepartamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Context.Data.Entidades.Localidad", "Localidad")
+                        .WithMany("Personas")
+                        .HasForeignKey("LocalidadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Context.Data.Entidades.Provincia", "Provincia")
+                        .WithMany("Personas")
+                        .HasForeignKey("ProvinciaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Context.Data.Entidades.TipoDocumento", "TipoDocumento")
+                        .WithMany("Personas")
+                        .HasForeignKey("TipoDocumentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Departamento");
+
+                    b.Navigation("Localidad");
+
+                    b.Navigation("Provincia");
+
+                    b.Navigation("TipoDocumento");
+                });
+
+            modelBuilder.Entity("Context.Data.Entidades.Departamento", b =>
+                {
+                    b.Navigation("Personas");
+                });
+
+            modelBuilder.Entity("Context.Data.Entidades.Localidad", b =>
+                {
+                    b.Navigation("Personas");
+                });
+
             modelBuilder.Entity("Context.Data.Entidades.Producto", b =>
                 {
                     b.Navigation("Fotos");
+                });
+
+            modelBuilder.Entity("Context.Data.Entidades.Provincia", b =>
+                {
+                    b.Navigation("Personas");
+                });
+
+            modelBuilder.Entity("Context.Data.Entidades.TipoDocumento", b =>
+                {
+                    b.Navigation("Personas");
                 });
 #pragma warning restore 612, 618
         }

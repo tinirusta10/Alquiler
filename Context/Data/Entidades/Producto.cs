@@ -30,7 +30,7 @@ namespace Context.Data.Entidades
 
 
 
-        public List<Fotos> Fotos{ get; set; }
+        public List<Foto> Fotos{ get; set; }
 
     }
 }

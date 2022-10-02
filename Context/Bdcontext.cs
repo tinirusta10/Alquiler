@@ -14,19 +14,19 @@ namespace Context
         {
         }
 
-        public DbSet<Persona> Persona { get; set; }
+        public DbSet<Persona> Personas { get; set; }
 
         public DbSet<Producto> Productos { get; set; }
 
-        public DbSet<Provincia> Provincia { get; set; }
+        public DbSet<Provincia> Provincias { get; set; }
 
-        public DbSet<Departamento> Departamento { get; set; }
+        public DbSet<Departamento> Departamentos { get; set; }
 
-        public DbSet<TipoDocumento> TipoDocumento { get; set; }
+        public DbSet<TipoDocumento> TipoDocumentos { get; set; }
 
-        public DbSet<Localidad> Localidad { get; set; }
+        public DbSet<Localidad> Localidades { get; set; }
 
-        public DbSet<Fotos> Fotos { get; set; }
+        public DbSet<Foto> Fotos { get; set; }
 
     }
 }
