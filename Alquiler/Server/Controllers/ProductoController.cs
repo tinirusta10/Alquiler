@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Alquiler.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/productos")]
     [ApiController]
     public class ProductoController : ControllerBase
     {
