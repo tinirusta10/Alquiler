@@ -73,14 +73,14 @@ namespace Alquiler.Server.Controllers
             person.Mail = persona.Mail;
             person.NumeroTelefono = persona.NumeroTelefono;
             person.DNI = persona.DNI;
-            person.TipoDocumento = persona.TipoDocumento;
-            person.Provincia = persona.Provincia;
+            person.TipoDocumentoId = persona.TipoDocumentoId;
+            person.ProvinciaId = persona.ProvinciaId;
             person.Barrio = persona.Barrio;
             person.Piso = persona.Piso;
-            person.Departamento = persona.Departamento;
+            person.DepartamentoId = persona.DepartamentoId;
             person.calle = persona.calle;
             person.Depto = persona.Depto;
-            person.Localidad = persona.Localidad;
+            person.LocalidadId = persona.LocalidadId;
             person.Altura = persona.Altura;
             person.CP = persona.CP;
 
