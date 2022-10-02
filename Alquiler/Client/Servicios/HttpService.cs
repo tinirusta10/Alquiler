@@ -2,34 +2,37 @@
 
 namespace Alquiler.Client.Servicios
 {
-    //public class HttpService
-    //{
-        //private readonly HttpClient http;
+    public class HttpService : IHttpService
+    {
+        private readonly HttpClient http;
 
-        //public HttpService(HttpClient http)
-        //{
-          //  this.http = http;
-        //}
 
-        //public async Task<Httprespuesta<T>> Get<T>(string url)
-        //{
-            //var response = await http.GetAsync(url);
-            //if (response.IsSuccessStatusCode)
-            //{
-                //var respuesta = await deserealizarRespuesta<T>(response);
-              //  return new Httprespuesta<T>(respuesta, false, response);
-            //}
-            //else
-            //{
+        
 
-          //  }
-        //}
+        public HttpService(HttpClient http)
+        {
+            this.http = http;
+        }
 
-        //private async Task<T> deserealizarRespuesta<T>(HttpResponseMessage response)
-       // {
-            //var respuestaStr = await response.Content.ReadAsStringAsync();
-          //  return JsonSerializer.Deserialize<T>(respuestaStr,
-        //        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-      //  }
-  //  }
+        public async Task<Httprespuesta<T>> Get<T>(string url)
+        {
+            var response = await http.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var respuesta = await deserealizarRespuesta<T>(response);
+                return new Httprespuesta<T>(respuesta, false, response);
+            }
+            else
+            {
+                return new Httprespuesta<T>(default, true, response);
+            }
+        }
+
+        private async Task<T> deserealizarRespuesta<T>(HttpResponseMessage response)
+        {
+            var respuestaStr = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<T>(respuestaStr,
+                new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
+    }
 }

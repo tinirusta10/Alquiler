@@ -1,0 +1,56 @@
+﻿@page "/prueba"
+@using Context.Data.Entidades
+@inject IHttpService Http
+<h3>Lista de Alquileres</h3>
+
+<table>
+    <tr>
+        <th>Alquileres</th>
+        <th>Nombre del producto</th>
+        <th>Precio del producto</th>
+        <th>Detalles del producto</th>
+        <th>Foto</th>
+    </tr>
+    @if (productos == null)
+    {
+        <tr>Cargando............</tr>
+    }
+    else if(productos.Count == 0)
+    {
+        <tr>No existen datos</tr>
+    }
+    else @foreach (var item in productos)
+        {
+            <tr>
+                <td>@item.NombreProducto</td>
+                <td>@item.PrecioProducto</td>
+                <td>@item.DetallesProducto</td>
+                <td>@item.Fotos</td>
+            </tr>
+        }
+</table>
+
+
+
+@code {
+    List<Producto> productos = new List<Producto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitializedAsync();
+        await Leer();
+    }
+
+    private async Task Leer()
+    {
+        var respuesta = await http.Get<List<Producto>>("api/productos");
+        if (respuesta.Error)
+        {
+            productos = respuesta.Respuesta;
+        }
+    }
+
+
+
+
+}

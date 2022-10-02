@@ -16,7 +16,7 @@ namespace Context.Data.Entidades
 
 
         
-        public int ProductoId { get; set; }
+      
         public Producto Producto { get; set; }
     }
 
